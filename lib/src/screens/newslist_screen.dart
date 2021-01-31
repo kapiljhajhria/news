@@ -28,7 +28,7 @@ class _NewsListState extends State<NewsList> {
       builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot) {
         if (snapshot.hasData)
           return ListView.builder(
-            itemCount: 100,
+            itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
               return Text(snapshot.data[index].toString());
             },
