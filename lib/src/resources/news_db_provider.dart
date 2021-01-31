@@ -10,7 +10,7 @@ import '../models/item_model.dart';
 class NewsDbProvider {
   Database db;
 
-  init() async {
+  void init() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
 
     final path = join(documentsDirectory.path, "items.db");
@@ -37,7 +37,7 @@ class NewsDbProvider {
     });
   }
 
-  fetchItem(int id) async {
+  Future<ItemModel> fetchItem(int id) async {
     //get item from database
 
     //query the item
@@ -51,5 +51,5 @@ class NewsDbProvider {
     return null;
   }
 
-  addItem(ItemModel item) => db.insert("Items", item.toMapForDb());
+  Future<int> addItem(ItemModel item) => db.insert("Items", item.toMapForDb());
 }

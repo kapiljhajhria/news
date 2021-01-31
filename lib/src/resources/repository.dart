@@ -10,11 +10,11 @@ class Respository {
   //init db
 
   //fetch top Ids from api
-  fetchTopIds() => apiProvider.fetchTopIds();
+  Future<List<int>> fetchTopIds() => apiProvider.fetchTopIds();
 
   //fetch item, check local db first, if null fetch from api
 
-  fetchItem(int id) async {
+  Future<ItemModel> fetchItem(int id) async {
     var item;
 
     item = dbProvider.fetchItem(id);
