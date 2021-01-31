@@ -63,4 +63,23 @@ class ItemModel {
         score = mapDb['score'],
         title = mapDb['title'],
         descendants = mapDb['descendants'];
+
+  Map<String, dynamic> toMapForDb() {
+    return <String, dynamic>{
+      "id": id,
+      "deleted": deleted ? 1 : 0,
+      "type": type,
+      "by": by,
+      "time": time,
+      "text": text,
+      "dead": dead ? 1 : 0,
+      "parent": parent,
+      "poll": poll,
+      "kids": jsonEncode(kids),
+      "url": url,
+      "score": score,
+      "title": title,
+      "descendants": descendants,
+    };
+  }
 }
