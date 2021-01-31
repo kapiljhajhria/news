@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:news/src/resources/repository.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
@@ -7,7 +8,7 @@ import 'package:path/path.dart';
 import 'dart:async';
 import '../models/item_model.dart';
 
-class NewsDbProvider {
+class NewsDbProvider implements Source, Cache {
   Database db;
 
   void init() async {
@@ -52,4 +53,10 @@ class NewsDbProvider {
   }
 
   Future<int> addItem(ItemModel item) => db.insert("Items", item.toMapForDb());
+
+  @override
+  Future<List<int>> fetchTopIds() {
+    // TODO: implement fetchTopIds
+    return null;
+  }
 }

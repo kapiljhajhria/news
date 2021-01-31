@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' show Client;
+import 'package:news/src/resources/repository.dart';
 import '../models/item_model.dart';
 import 'dart:async';
 
-class NewsApiProvider {
+class NewsApiProvider implements Source {
   Client client = Client();
   List<int> topIds = [];
   String _rootUrl = "https://hacker-news.firebaseio.com/v0";
