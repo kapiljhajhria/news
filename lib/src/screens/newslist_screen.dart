@@ -12,6 +12,9 @@ class _NewsListState extends State<NewsList> {
       appBar: AppBar(
         title: Text("Hacker News"),
       ),
+      body: Center(
+        child: Text("News Here"),
+      ),
     );
   }
 }
