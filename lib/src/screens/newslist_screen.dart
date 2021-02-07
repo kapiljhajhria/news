@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news/src/bloc/stories_bloc.dart';
 import 'package:news/src/bloc/stories_provider.dart';
+import 'package:news/src/widgets/news_list_tile.dart';
 
 class NewsList extends StatefulWidget {
   @override
@@ -30,7 +31,9 @@ class _NewsListState extends State<NewsList> {
           return ListView.builder(
             itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
-              return Text(snapshot.data[index].toString());
+              return NewsListTile(
+                itemId: snapshot.data[index],
+              );
             },
           );
         return CircularProgressIndicator(
