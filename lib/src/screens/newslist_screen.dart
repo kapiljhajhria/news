@@ -31,6 +31,7 @@ class _NewsListState extends State<NewsList> {
           return ListView.builder(
             itemCount: snapshot.data.length,
             itemBuilder: (BuildContext context, int index) {
+              bloc.fetchItem(snapshot.data[index]);
               return NewsListTile(
                 itemId: snapshot.data[index],
               );
