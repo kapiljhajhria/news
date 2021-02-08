@@ -44,7 +44,7 @@ class StoriesBloc {
     print("itemTrasformer called");
     return ScanStreamTransformer(
       (Map<int, Future<ItemModel>> cache, int id, index) {
-        print("index $index");
+        // print("index $index");
         cache[id] = _repository.fetchItem(id);
         return cache;
       },

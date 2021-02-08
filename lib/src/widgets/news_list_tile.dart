@@ -10,14 +10,14 @@ class NewsListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("itemid is $itemId");
+    // print("itemid is $itemId");
     final bloc = StoriesProvider.of(context);
     return StreamBuilder(
         stream: bloc.items,
         builder: (BuildContext context,
             AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
           if (!snapshot.hasData) return Text("Stream still loading");
-          print("got data for itemid $itemId");
+          // print("got data for itemid $itemId");
           return FutureBuilder(
             future: snapshot.data[itemId],
             builder:
