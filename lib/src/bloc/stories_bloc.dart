@@ -40,6 +40,10 @@ class StoriesBloc {
     _topIds.sink.add(ids);
   }
 
+  clearCache() {
+    return _repository.clearCache();
+  }
+
   _itemsTransformer() {
     print("itemTrasformer called");
     return ScanStreamTransformer(
