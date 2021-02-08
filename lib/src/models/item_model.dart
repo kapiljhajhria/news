@@ -9,7 +9,6 @@ class ItemModel {
   final String text;
   final bool dead;
   final int parent;
-  final bool poll;
   final List<dynamic> kids;
   final String url;
   final int score;
@@ -25,7 +24,6 @@ class ItemModel {
       this.text,
       this.dead,
       this.parent,
-      this.poll,
       this.kids,
       this.url,
       this.score,
@@ -41,7 +39,6 @@ class ItemModel {
         text = parsedJson['text'] ?? "",
         dead = parsedJson['dead'] ?? false,
         parent = parsedJson['parent'],
-        poll = parsedJson['poll'],
         kids = parsedJson['kids'] ?? [],
         url = parsedJson['url'],
         score = parsedJson['score'],
@@ -57,7 +54,6 @@ class ItemModel {
         text = mapDb['text'],
         dead = mapDb['dead'] == 1,
         parent = mapDb['parent'],
-        poll = mapDb['poll'],
         kids = jsonDecode(mapDb['kids']),
         url = mapDb['url'],
         score = mapDb['score'],
@@ -74,7 +70,6 @@ class ItemModel {
       "text": text,
       "dead": dead ? 1 : 0,
       "parent": parent,
-      "poll": poll,
       "kids": jsonEncode(kids),
       "url": url,
       "score": score,
