@@ -9,23 +9,21 @@ import 'dart:async';
 import '../models/item_model.dart';
 
 class NewsDbProvider implements Source, Cache {
+  final String tableName = "items";
   Database db;
 
-  NewsDbProvider() {
-    init();
-  }
-
   void init() async {
+    print("called init in db constructor");
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
 
     final path = join(documentsDirectory.path, "items.db");
 
     db = await openDatabase(path, version: 1,
-        onCreate: (Database newDb, int version) {
-      newDb.execute(""" 
-      CREATE TABLE Items
+        onCreate: (Database newDb, int version) async {
+      await newDb.execute(""" 
+      create table $tableName
       (
-        id INTEGER PRIMARY KEY
+        id INTEGER PRIMARY KEY,
         type TEXT,
         by TEXT,
         time INTEGER,
@@ -36,28 +34,35 @@ class NewsDbProvider implements Source, Cache {
         deleted INTEGER,
         url TEXT,
         score INTEGER,
+        title TEXT,
         descendants INTEGER
       )
        """);
     });
   }
 
+  NewsDbProvider() {
+    init();
+    print("init completed");
+  }
   Future<ItemModel> fetchItem(int id) async {
     //get item from database
 
     //query the item
 
-    final maps = await db.query("Items",
-        distinct: true, columns: null, where: "id=?", whereArgs: [id]);
+    final maps = await db
+        .query(tableName, columns: null, where: 'id = ?', whereArgs: [id]);
 
     if (maps.length > 0) {
-      return ItemModel.fromDb(maps[0]);
+      return ItemModel.fromDb(maps.first);
     }
     return null;
   }
 
-  Future<int> addItem(ItemModel item) => db.insert("Items", item.toMapForDb(),
-      conflictAlgorithm: ConflictAlgorithm.ignore);
+  Future<int> addItem(ItemModel item) {
+    return db.insert('items', item.toMapForDb(),
+        conflictAlgorithm: ConflictAlgorithm.ignore);
+  }
 
   @override
   Future<List<int>> fetchTopIds() {
