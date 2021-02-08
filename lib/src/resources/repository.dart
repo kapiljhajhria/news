@@ -3,7 +3,7 @@ import 'news_api_provider.dart';
 import 'news_db_provider.dart';
 import '../models/item_model.dart';
 
-class Respository {
+class Repository {
   List<Source> sources = <Source>[
     newsDbProvider,
     NewsApiProvider(),
