@@ -32,10 +32,21 @@ class NewsDetails extends StatelessWidget {
           builder:
               (BuildContext context, AsyncSnapshot<ItemModel> itemSnapshot) {
             if (!itemSnapshot.hasData) Text("fetching comments data......");
-            return Text(itemSnapshot.data.title);
+            return buildTitle(itemSnapshot.data);
           },
         );
       },
+    );
+  }
+
+  Widget buildTitle(ItemModel item) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      child: Text(
+        item.title,
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      ),
     );
   }
 }
