@@ -32,7 +32,8 @@ class NewsDetails extends StatelessWidget {
           future: itemFuture,
           builder:
               (BuildContext context, AsyncSnapshot<ItemModel> itemSnapshot) {
-            if (!itemSnapshot.hasData) Text("fetching comments data......");
+            if (!itemSnapshot.hasData)
+              return Text("fetching comments data......");
             return buildList(itemSnapshot.data, snapshot.data);
           },
         );
