@@ -14,7 +14,14 @@ class Comment extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<ItemModel> snapshot) {
         if (!snapshot.hasData) return Text("fetching comment");
 
-        final children = <Widget>[Text(snapshot.data.text)];
+        final item = snapshot.data;
+
+        final children = <Widget>[
+          ListTile(
+            title: Text(item.text),
+            subtitle: Text(item.by),
+          )
+        ];
 
         snapshot.data.kids.forEach((kidId) {
           children.add(Comment(
