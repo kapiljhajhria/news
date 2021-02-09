@@ -6,14 +6,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoriesProvider(
-      child: MaterialApp(
-        title: "Awesome News",
-        onGenerateRoute: (RouteSettings settings) {
-          return MaterialPageRoute(builder: (context) {
-            return NewsList();
-          });
-        },
-      ),
+      child: MaterialApp(title: "Awesome News", onGenerateRoute: routes),
     );
+  }
+
+  Route routes(RouteSettings settings) {
+    return MaterialPageRoute(builder: (context) {
+      return NewsList();
+    });
   }
 }
