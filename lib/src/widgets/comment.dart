@@ -19,7 +19,7 @@ class Comment extends StatelessWidget {
         final children = <Widget>[
           ListTile(
             title: Text(item.text),
-            subtitle: Text(item.by),
+            subtitle: Text(item.by.isEmpty ? "deleted" : item.by),
           )
         ];
 
