@@ -41,11 +41,13 @@ class NewsDetails extends StatelessWidget {
 
   Widget buildTitle(ItemModel item) {
     return Container(
+      width: double.infinity,
+      // alignment: Alignment.topCenter,
       margin: EdgeInsets.all(10),
       child: Text(
         item.title,
         textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ),
     );
   }
