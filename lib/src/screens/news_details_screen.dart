@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:news/src/bloc/comments_provider.dart';
 import 'package:news/src/models/item_model.dart';
+import 'package:news/src/widgets/comment.dart';
 import '../models/item_model.dart';
 
 class NewsDetails extends StatelessWidget {
@@ -32,7 +33,7 @@ class NewsDetails extends StatelessWidget {
           builder:
               (BuildContext context, AsyncSnapshot<ItemModel> itemSnapshot) {
             if (!itemSnapshot.hasData) Text("fetching comments data......");
-            return buildTitle(itemSnapshot.data);
+            return buildList(itemSnapshot.data, snapshot.data);
           },
         );
       },
@@ -40,31 +41,47 @@ class NewsDetails extends StatelessWidget {
   }
 
   Widget buildTitle(ItemModel item) {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          // alignment: Alignment.topCenter,
-          margin: EdgeInsets.all(10),
-          child: Text(
-            item.title,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ),
-        Divider(
-          height: 8,
-          thickness: 2,
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 10),
-          alignment: Alignment.topLeft,
-          child: Text(
-            "Comments",
-            style: TextStyle(fontSize: 18),
-          ),
-        ),
-      ],
+    return Container(
+      width: double.infinity,
+      // alignment: Alignment.topCenter,
+      margin: EdgeInsets.all(10),
+      child: Text(
+        item.title,
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  Widget buildList(ItemModel item, Map<int, Future<ItemModel>> itemMap) {
+    final children = <Widget>[];
+    children.add(buildTitle(item));
+    final commentsList = item.kids.map((kidId) {
+      return Comment(
+        itemId: kidId,
+        itemMap: itemMap,
+      );
+    }).toList();
+    children.addAll(commentsList);
+    return ListView(
+      children: children,
+      // [
+      //   Divider(
+      //     height: 8,
+      //     thickness: 1,
+      //     color: Colors.black26,
+      //     endIndent: 10,
+      //     indent: 10,
+      //   ),
+      //   Container(
+      //     margin: EdgeInsets.only(top: 10, left: 10, bottom: 15),
+      //     alignment: Alignment.topLeft,
+      //     child: Text(
+      //       "Comments",
+      //       style: TextStyle(fontSize: 18),
+      //     ),
+      //   ),
+      // ],
     );
   }
 }
