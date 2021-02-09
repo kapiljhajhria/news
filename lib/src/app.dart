@@ -17,8 +17,10 @@ class App extends StatelessWidget {
         return NewsList();
       });
     }
+    final itemId = int.parse(settings.name.replaceFirst("/", ""));
+
     return MaterialPageRoute(builder: (context) {
-      return NewsDetails();
+      return NewsDetails(itemId: itemId);
     });
   }
 }
