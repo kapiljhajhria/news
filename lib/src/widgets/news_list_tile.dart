@@ -49,7 +49,7 @@ class NewsListTile extends StatelessWidget {
           subtitle: Text(item.score.toString() + " points"),
           trailing: buildComments(item),
           onTap: () {
-            launchUrl(item.url);
+            // launchUrl(item.url);
           },
         ),
         Divider(
