@@ -40,15 +40,31 @@ class NewsDetails extends StatelessWidget {
   }
 
   Widget buildTitle(ItemModel item) {
-    return Container(
-      width: double.infinity,
-      // alignment: Alignment.topCenter,
-      margin: EdgeInsets.all(10),
-      child: Text(
-        item.title,
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      ),
+    return Column(
+      children: [
+        Container(
+          width: double.infinity,
+          // alignment: Alignment.topCenter,
+          margin: EdgeInsets.all(10),
+          child: Text(
+            item.title,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Divider(
+          height: 8,
+          thickness: 2,
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 10),
+          alignment: Alignment.topLeft,
+          child: Text(
+            "Comments",
+            style: TextStyle(fontSize: 18),
+          ),
+        ),
+      ],
     );
   }
 }
