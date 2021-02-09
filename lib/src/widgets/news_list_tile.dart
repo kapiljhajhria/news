@@ -3,11 +3,20 @@ import 'package:news/src/widgets/loading_container.dart';
 import '../models/item_model.dart';
 import '../bloc/stories_provider.dart';
 import 'dart:async';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsListTile extends StatelessWidget {
   final int itemId;
 
   const NewsListTile({Key key, this.itemId}) : super(key: key);
+
+  launchUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url, forceSafariVC: false);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +48,9 @@ class NewsListTile extends StatelessWidget {
           title: Text(item.title),
           subtitle: Text(item.score.toString() + " points"),
           trailing: buildComments(item),
+          onTap: () {
+            launchUrl(item.url);
+          },
         ),
         Divider(
           height: 8,
