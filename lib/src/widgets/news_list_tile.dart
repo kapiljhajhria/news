@@ -45,13 +45,14 @@ class NewsListTile extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: Text(item.title),
+          title: GestureDetector(
+              onTap: () {
+                launchUrl(item.url);
+              },
+              child: Text(item.title)),
           subtitle: Text(item.score.toString() + " points"),
-          trailing: buildComments(item),
-          onTap: () {
-            // launchUrl(item.url);
-            Navigator.pushNamed(context, "/$itemId");
-          },
+          trailing: buildComments(item, context),
+          onTap: () {},
         ),
         Divider(
           height: 8,
@@ -60,9 +61,14 @@ class NewsListTile extends StatelessWidget {
     );
   }
 
-  buildComments(ItemModel item) {
-    return Column(
-      children: [Icon(Icons.comment), Text(item.descendants.toString())],
+  buildComments(ItemModel item, BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, "/${item.id}");
+      },
+      child: Column(
+        children: [Icon(Icons.comment), Text(item.descendants.toString())],
+      ),
     );
   }
 }
